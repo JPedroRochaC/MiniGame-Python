@@ -1,2 +1,2 @@
 # projeto-python
-Projeto em Python desenvolvido para trabalho da faculdade
+Projeto em Python em desenvolvimento para trabalho da faculdade
