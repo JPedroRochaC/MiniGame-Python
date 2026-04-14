@@ -1,41 +1,68 @@
-🎯 Adivinhe o Número
-Jogo de adivinhação de número desenvolvido em Python como exercício de lógica de programação.
-📋 Sobre o Projeto
-Mini game de terminal onde o jogador deve adivinhar um número sorteado aleatoriamente. O jogador escolhe um nível de dificuldade e recebe dicas a cada tentativa, indicando se o chute foi alto ou baixo demais.
-Desenvolvido como parte dos estudos de lógica de programação no curso de Análise e Desenvolvimento de Sistemas - UNIFAMETRO.
-🚀 Como Executar
-Pré-requisitos: Python 3.x instalado
-bash# Clone o repositório
-git clone https://github.com/JPedroRochaC/projeto-python-mysql.git
+# 🎯 Adivinhe o Número
 
-# Acesse a pasta do projeto
-cd projeto-python-mysql
+Jogo de adivinhação desenvolvido em Python como exercício de lógica de programação.
+
+---
+
+## 📋 Sobre o Projeto
+
+Mini game de terminal onde o jogador deve adivinhar um número sorteado aleatoriamente. A cada tentativa, o jogo indica se o chute foi alto ou baixo demais.
+
+Desenvolvido como parte dos estudos de lógica de programação no curso de **Análise e Desenvolvimento de Sistemas — UNIFAMETRO**.
+
+---
+
+## 🚀 Como Executar
+
+**Pré-requisito:** Python 3.x instalado
+
+```bash
+# Clone o repositório
+git clone https://github.com/JPedroRochaC/adivinha-o-numero.git
+
+# Acesse a pasta
+cd adivinha-o-numero
 
 # Execute o jogo
-python src/adivinha_numero.py
-🎮 Como Jogar
+python minigame.py
+```
+
+---
+
+## 🎮 Como Jogar
 
 Escolha o nível de dificuldade:
 
-Fácil → número entre 1 e 10
-Médio → número entre 1 e 15
-Difícil → número entre 1 e 20
+| Nível | Intervalo |
+|-------|-----------|
+| 🟢 Fácil | 1 a 10 |
+| 🟡 Médio | 1 a 15 |
+| 🔴 Difícil | 1 a 20 |
 
+- O jogo avisa se o seu chute foi **muito alto** ou **muito baixo**
+- Ao acertar, você vê quantas **tentativas** usou
+- Pode jogar quantas vezes quiser!
 
-Digite seus chutes — o jogo avisa se o número é muito alto ou muito baixo
-Acertou? O jogo mostra quantas tentativas você usou e pergunta se quer jogar de novo
+---
 
-🛠️ Tecnologias
+## 🛠️ Tecnologias
 
-Python 3
-Módulo random (biblioteca padrão)
+- Python 3
+- Módulo `random` (biblioteca padrão)
 
-📁 Estrutura do Projeto
-projeto-python-mysql/
-├── src/
-│   └── adivinha_numero.py
-├── README.md
-└── .gitignore
-👤 Autor
-João Pedro Rocha
-https://github.com/JPedroRochaCmagem
+---
+
+## 📁 Estrutura do Projeto
+
+```
+adivinha-o-numero/
+├── minigame.py
+└── README.md
+```
+
+---
+
+## 👤 Autor
+
+**João Pedro Rocha**  
+[![GitHub](https://img.shields.io/badge/GitHub-JPedroRochaC-181717?style=flat&logo=github)](https://github.com/JPedroRochaC)
