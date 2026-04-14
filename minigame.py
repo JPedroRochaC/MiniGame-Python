@@ -36,5 +36,4 @@ while jogar == 'S':
 
     print('Vamos jogar novamente?')
     jogar = input('[S/N]: ').upper()
-
 print('Até mais!')
