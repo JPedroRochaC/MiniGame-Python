@@ -1,68 +1,95 @@
-# 🎯 Adivinhe o Número
+# 🎯 Adivinhe o Número (Lógica Proposicional)
 
-Jogo de adivinhação desenvolvido em Python como exercício de lógica de programação.
+Jogo de adivinhação desenvolvido em Python utilizando **lógica proposicional**.
 
 ---
 
 ## 📋 Sobre o Projeto
 
-Mini game de terminal onde o jogador deve adivinhar um número sorteado aleatoriamente. A cada tentativa, o jogo indica se o chute foi alto ou baixo demais.
+Este é um mini game de terminal onde o jogador deve adivinhar um número secreto.
 
-Desenvolvido como parte dos estudos de lógica de programação no curso de **Análise e Desenvolvimento de Sistemas — UNIFAMETRO**.
+Diferente de um jogo comum, o número é gerado com base em **regras de lógica matemática**, utilizando proposições.
+
+Desenvolvido como parte dos estudos no curso de  
+**Análise e Desenvolvimento de Sistemas — UNIFAMETRO**
+
+---
+
+## 🧠 Lógica do Jogo
+
+O número secreto segue a seguinte regra lógica:
+
+(P ∧ Q) ∧ ¬R
+
+Onde:
+
+- **P** → número é par  
+- **Q** → número é maior ou igual a 10  
+- **R** → número é múltiplo de 3  
+
+👉 O jogador deve usar essas condições para deduzir o número correto.
 
 ---
 
 ## 🚀 Como Executar
 
-**Pré-requisito:** Python 3.x instalado
+### Pré-requisitos:
+- Python 3 instalado
 
-```bash
-# Clone o repositório
-git clone https://github.com/JPedroRochaC/adivinha-o-numero.git
+### Passos:
 
-# Acesse a pasta
-cd adivinha-o-numero
+1. Clone o repositório
+2. Acesse a pasta do projeto
+3. Execute o arquivo:
 
-# Execute o jogo
 python minigame.py
-```
 
 ---
 
 ## 🎮 Como Jogar
 
-Escolha o nível de dificuldade:
+1. Escolha o nível de dificuldade:
 
-| Nível | Intervalo |
-|-------|-----------|
-| 🟢 Fácil | 1 a 10 |
-| 🟡 Médio | 1 a 15 |
-| 🔴 Difícil | 1 a 20 |
+- 🟢 Fácil: 10 a 20  
+- 🟡 Médio: 10 a 30  
+- 🔴 Difícil: 10 a 40  
 
-- O jogo avisa se o seu chute foi **muito alto** ou **muito baixo**
-- Ao acertar, você vê quantas **tentativas** usou
-- Pode jogar quantas vezes quiser!
+2. Leia as regras lógicas exibidas  
+3. Digite seu chute dentro do intervalo  
+4. O jogo informará:
+   - Se o número é maior ou menor  
+5. Continue até acertar  
 
 ---
 
 ## 🛠️ Tecnologias
 
-- Python 3
-- Módulo `random` (biblioteca padrão)
+- Python 3  
+- Biblioteca padrão `random`
 
 ---
 
 ## 📁 Estrutura do Projeto
 
-```
 adivinha-o-numero/
-├── minigame.py
-└── README.md
-```
+- minigame.py
+- README.md
+
+---
+
+## 📌 Funcionalidades
+
+- Sistema de dificuldade  
+- Validação de entrada do usuário  
+- Uso de lógica proposicional (P, Q, R)  
+- Geração de número com base em regras  
+- Contador de tentativas  
 
 ---
 
 ## 👤 Autor
 
-**João Pedro Rocha**  
-[![GitHub](https://img.shields.io/badge/GitHub-JPedroRochaC-181717?style=flat&logo=github)](https://github.com/JPedroRochaC)
+João Pedro Rocha  
+GitHub: https://github.com/JPedroRochaC  
+
+---
