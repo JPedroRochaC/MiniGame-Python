@@ -1,0 +1,447 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Special+Elite&family=Courier+Prime:ital@0;1&display=swap');
+
+:root {
+  --bg:          #0a0a0a;
+  --bg-card:     #111111;
+  --bg-card-alt: #161616;
+  --border:      #2a0000;
+  --red:         #cc2200;
+  --red-bright:  #ff3311;
+  --red-dim:     #aa2200;
+  --gold:        #c9a84c;
+  --text:        #e0d8d0;
+  --text-dim:    #8a6a5a;
+  --text-muted:  #3a2a22;
+  --green:       #2e7d32;
+  --green-bright:#4caf50;
+  --smoke:       #1a1a1a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 15% 0%, #1a0303 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 100%, #150202 0%, transparent 50%),
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(200,0,0,0.018) 39px, rgba(200,0,0,0.018) 40px);
+  min-height: 100vh;
+  padding: 2.5rem 1rem 5rem;
+  font-family: 'Courier Prime', monospace;
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.6;
+}
+
+.page-wrapper {
+  width: 100%;
+  max-width: 740px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeUp 0.6s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── HEADER ── */
+.site-header {
+  text-align: center;
+  padding: 2rem 1rem 1.5rem;
+  border-bottom: 1px solid var(--red-dim);
+}
+
+.badge {
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  font-family: 'Special Elite', cursive;
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  padding: 0.25rem 1rem;
+  margin-bottom: 0.9rem;
+  clip-path: polygon(6px 0%, calc(100% - 6px) 0%, 100% 50%, calc(100% - 6px) 100%, 6px 100%, 0% 50%);
+}
+
+.site-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 40px rgba(200,34,0,0.3);
+}
+
+.subtitle {
+  font-size: 0.78rem;
+  color: var(--red-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+/* ── CARDS ── */
+.card {
+  background: var(--bg-card);
+  border-left: 3px solid var(--red);
+  padding: 1.8rem;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.7), inset 0 0 40px rgba(150,0,0,0.03);
+  animation: fadeUp 0.6s ease both;
+}
+.card:nth-child(2) { animation-delay: 0.08s; }
+.card:nth-child(3) { animation-delay: 0.16s; }
+
+.card-label {
+  font-family: 'Special Elite', cursive;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  color: var(--red-dim);
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── CENA DO CRIME ── */
+.img-cena {
+  width: 100%;
+  display: block;
+  border: 1px solid var(--red-dim);
+  filter: brightness(0.85) contrast(1.1);
+  box-shadow: 0 6px 30px rgba(0,0,0,0.8);
+  transition: filter 0.4s;
+}
+.img-cena:hover { filter: brightness(1) contrast(1.05); }
+
+.scene-caption {
+  background: #0d0d0d;
+  color: var(--red-dim);
+  font-family: 'Special Elite', cursive;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-align: center;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-top: none;
+}
+
+/* ── PISTAS ── */
+.pistas-grid { display: flex; flex-direction: column; gap: 0.7rem; }
+
+.pista-item { display: flex; cursor: pointer; }
+.pista-item input[type="checkbox"] { display: none; }
+
+.pista-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border);
+  border-left: 3px solid #2a2a2a;
+  padding: 0.85rem 1rem;
+  width: 100%;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.pista-item input:checked + .pista-box {
+  border-left-color: var(--red);
+  background: #160606;
+}
+
+.pista-item input:checked + .pista-box::after {
+  content: "✓ COLETADA";
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Special Elite', cursive;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--red);
+}
+
+.pista-icon { font-size: 1.4rem; flex-shrink: 0; }
+
+.pista-nome {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  display: block;
+}
+
+.pista-desc {
+  font-size: 0.74rem;
+  color: var(--red-dim);
+  font-style: italic;
+  display: block;
+  margin-top: 0.15rem;
+}
+
+/* ── SUSPEITOS ── */
+.suspeitos-foto { margin-bottom: 1.2rem; }
+
+.img-suspeitos {
+  width: 100%;
+  display: block;
+  border: 1px solid var(--red-dim);
+  filter: brightness(0.8) contrast(1.1) grayscale(20%);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+  transition: filter 0.4s;
+}
+.img-suspeitos:hover { filter: brightness(0.95) contrast(1.05); }
+
+.suspeitos-grid { display: flex; flex-direction: column; gap: 0.7rem; }
+
+.suspeito-item { display: flex; cursor: pointer; }
+.suspeito-item input[type="radio"] { display: none; }
+
+.suspeito-box {
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border);
+  border-left: 3px solid #2a2a2a;
+  padding: 1rem 1.2rem;
+  width: 100%;
+  transition: all 0.2s;
+}
+
+.suspeito-item input:checked + .suspeito-box {
+  border-left-color: var(--red);
+  background: #160606;
+}
+
+.suspeito-id {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.35rem;
+}
+
+.suspeito-numero {
+  font-family: 'Special Elite', cursive;
+  font-size: 0.62rem;
+  color: var(--red-dim);
+  letter-spacing: 0.1em;
+}
+
+.suspeito-nome {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.suspeito-desc {
+  font-size: 0.77rem;
+  color: var(--red-dim);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ── RESULTADO (index) ── */
+.resultado-section {
+  border: 1px solid;
+  border-left: 4px solid;
+  padding: 1.3rem 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+.resultado-section.status-vitoria { border-color: var(--gold); background: #0f0e00; }
+.resultado-section.status-erro    { border-color: var(--red);  background: #100505; }
+.resultado-section.status-aviso   { border-color: var(--red-dim); background: #0f0a0a; }
+
+.resultado-icon { font-size: 2rem; flex-shrink: 0; }
+
+.resultado-texto {
+  font-family: 'Special Elite', cursive;
+  font-size: 0.93rem;
+  color: var(--text);
+  line-height: 1.55;
+  letter-spacing: 0.03em;
+}
+
+/* ── BOTÃO ── */
+.btn-wrapper { display: flex; justify-content: center; }
+
+.btn-resolver {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: #0f0f0f;
+  color: var(--red-bright);
+  border: 1px solid var(--red);
+  font-family: 'Special Elite', cursive;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.9rem 2.5rem;
+  cursor: pointer;
+  transition: all 0.25s;
+  text-decoration: none;
+  box-shadow: 0 0 20px rgba(200,34,0,0.15);
+}
+.btn-resolver:hover {
+  background: var(--red);
+  color: #fff;
+  box-shadow: 0 0 30px rgba(200,34,0,0.4);
+  transform: translateY(-2px);
+}
+.btn-resolver:active { transform: translateY(0); }
+
+/* ── FOOTER ── */
+.site-footer {
+  text-align: center;
+  font-family: 'Special Elite', cursive;
+  font-size: 0.58rem;
+  letter-spacing: 0.25em;
+  color: var(--red-dim);
+  padding-top: 0.5rem;
+}
+
+/* ══════════════════════════════════════
+   PÁGINA RESULTADO — TABELA VERDADE
+══════════════════════════════════════ */
+
+.veredito-conteudo { display: flex; align-items: flex-start; gap: 1.2rem; }
+.veredito-icon { font-size: 2.2rem; flex-shrink: 0; }
+
+.escolhas-resumo { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.7rem; }
+
+.escolha-tag {
+  font-family: 'Special Elite', cursive;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.65rem;
+  border: 1px solid;
+}
+.escolha-tag.ok   { color: var(--green-bright); border-color: var(--green); background: #071207; }
+.escolha-tag.fail { color: var(--red-bright);   border-color: var(--red-dim); background: #100505; }
+
+/* Legenda */
+.legenda-grid { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.legenda-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.legenda-var {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--red);
+  width: 5rem;
+  flex-shrink: 0;
+}
+
+.legenda-desc { font-size: 0.82rem; color: var(--red-dim); font-style: italic; }
+
+.legenda-formula { border-bottom: none; margin-top: 0.3rem; }
+.legenda-formula .legenda-var { font-size: 0.72rem; letter-spacing: 0.08em; }
+.legenda-formula .legenda-desc { font-style: normal; font-size: 0.9rem; color: var(--text); }
+
+/* Tabela */
+.tabela-wrapper { overflow-x: auto; margin-bottom: 1rem; }
+
+.tabela-verdade {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.88rem;
+}
+
+.tabela-verdade thead tr { background: #0d0d0d; }
+
+.tabela-verdade thead th {
+  color: var(--red);
+  font-family: 'Special Elite', cursive;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  padding: 0.7rem 1rem;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+
+.tabela-verdade th.col-sep    { border-left: 2px solid var(--red-dim); }
+.tabela-verdade th.col-resultado { border-left: 2px solid var(--red); color: var(--red-bright); }
+
+.tabela-verdade tbody td {
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  font-weight: bold;
+  font-size: 0.9rem;
+  background: var(--bg-card);
+}
+
+.tabela-verdade tbody tr:nth-child(even) td { background: var(--bg-card-alt); }
+
+.tabela-verdade td.col-sep      { border-left: 2px solid var(--red-dim); }
+.tabela-verdade td.col-resultado { border-left: 2px solid var(--red); }
+
+/* V = verde, F = vermelho */
+.val-v { color: var(--green-bright) !important; }
+.val-f { color: #cc3333 !important; }
+
+/* Linha do jogador (acerto) */
+.linha-jogador td {
+  background: #1a0e00 !important;
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
+  font-weight: 900 !important;
+}
+
+/* Linha verdadeira */
+.linha-verdadeira:not(.linha-jogador) td { background: #071207 !important; }
+
+/* Linha errada */
+.linha-errada td {
+  background: #150303 !important;
+  outline: 2px solid var(--red);
+  outline-offset: -2px;
+  font-weight: 900 !important;
+}
+
+.marker {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-family: 'Special Elite', cursive;
+  font-size: 0.62rem;
+  color: var(--red);
+  letter-spacing: 0.08em;
+  vertical-align: middle;
+}
+
+.tabela-nota {
+  font-size: 0.74rem;
+  color: var(--red-dim);
+  font-style: italic;
+  line-height: 1.6;
+  border-top: 1px solid var(--border);
+  padding-top: 0.8rem;
+}
+
+.tabela-nota-erro {
+  color: var(--red) !important;
+  font-style: normal !important;
+  font-family: 'Special Elite', cursive;
+  font-size: 0.8rem !important;
+}

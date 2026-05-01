@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resultado — Detetive Lógico</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Special+Elite&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body class="body-resultado">
+
+  <div class="grain"></div>
+
+  <div class="page-wrapper">
+
+    <header class="site-header site-header-resultado">
+      <div class="badge badge-resultado">CASO #0047 — ANÁLISE LÓGICA</div>
+      <h1 class="titulo-resultado"> Tabela Verdade</h1>
+      <p class="subtitle">Análise lógica das suas escolhas</p>
+    </header>
+
+    <!-- VEREDITO -->
+    <section class="card card-resultado status-{{ status }}">
+      <div class="card-label">SEU VEREDITO</div>
+      <div class="veredito-conteudo">
+        <div class="veredito-icon">
+          {% if status == 'vitoria' %}{% else %}{% endif %}
+        </div>
+        <div>
+          <p class="resultado-texto">{{ resultado }}</p>
+          <div class="escolhas-resumo">
+            <span class="escolha-tag {{ 'ok' if pegadas else 'fail' }}">P: Pegadas {{ '✓' if pegadas else '✗' }}</span>
+            <span class="escolha-tag {{ 'ok' if cameras else 'fail' }}">Q: Câmera {{ '✓' if cameras else '✗' }}</span>
+            <span class="escolha-tag {{ 'ok' if ferramenta else 'fail' }}">R: Ferramenta {{ '✓' if ferramenta else '✗' }}</span>
+            <span class="escolha-tag {{ 'ok' if suspeito_correto else 'fail' }}">S: Culpado {{ '✓' if suspeito_correto else '✗' }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEGENDA -->
+    <section class="card card-resultado">
+      <div class="card-label">LEGENDA DAS PROPOSIÇÕES</div>
+      <div class="legenda-grid">
+        <div class="legenda-item"><span class="legenda-var">P</span><span class="legenda-desc">Pegadas encontradas no chão</span></div>
+        <div class="legenda-item"><span class="legenda-var">Q</span><span class="legenda-desc">Câmera de segurança desligada</span></div>
+        <div class="legenda-item"><span class="legenda-var">R</span><span class="legenda-desc">Pé de cabra encontrado</span></div>
+        <div class="legenda-item"><span class="legenda-var">S</span><span class="legenda-desc">Suspeito correto identificado</span></div>
+        {% if acertou %}
+        <div class="legenda-item legenda-formula">
+          <span class="legenda-var">resultado</span>
+          <span class="legenda-desc"><strong>(P ∧ Q ∧ R) ∧ S</strong></span>
+        </div>
+        {% endif %}
+      </div>
+    </section>
+
+    <!-- TABELA VERDADE -->
+    <section class="card card-resultado">
+      <div class="card-label">
+        {% if acertou %}TABELA VERDADE — (P ∧ Q ∧ R) ∧ S{% else %}SUA LINHA — (P ∧ Q ∧ R) ∧ S{% endif %}
+      </div>
+
+      <div class="tabela-wrapper">
+        <table class="tabela-verdade tabela-resultado">
+          <thead>
+            <tr>
+              <th>P</th>
+              <th>Q</th>
+              <th>R</th>
+              <th>S</th>
+              <th class="col-sep">P∧Q∧R</th>
+              <th class="col-resultado">(P∧Q∧R)∧S</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in tabela %}
+              {% if acertou or row.jogador %}
+            <tr class="
+              {% if row.jogador and acertou %} linha-jogador {% endif %}
+              {% if row.resultado and acertou %} linha-verdadeira {% endif %}
+              {% if row.jogador and not acertou %} linha-errada {% endif %}
+            ">
+              <td class="{{ 'val-v' if row.p else 'val-f' }}">{{ 'V' if row.p else 'F' }}</td>
+              <td class="{{ 'val-v' if row.q else 'val-f' }}">{{ 'V' if row.q else 'F' }}</td>
+              <td class="{{ 'val-v' if row.r else 'val-f' }}">{{ 'V' if row.r else 'F' }}</td>
+              <td class="{{ 'val-v' if row.s else 'val-f' }}">{{ 'V' if row.s else 'F' }}</td>
+              <td class="col-sep {{ 'val-v' if row.pqr else 'val-f' }}">{{ 'V' if row.pqr else 'F' }}</td>
+              <td class="col-resultado {{ 'val-v' if row.resultado else 'val-f' }}">
+                {{ 'V' if row.resultado else 'F' }}
+                {% if row.jogador %}<span class="marker">◄ você</span>{% endif %}
+              </td>
+            </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      {% if acertou %}
+      <p class="tabela-nota">
+        Linha dourada = suas escolhas. Verde claro = combinações verdadeiras.
+        O caso só é resolvido quando <strong>todas as pistas são coletadas</strong> e o <strong>suspeito correto é identificado</strong>.
+      </p>
+      {% else %}
+      <p class="tabela-nota tabela-nota-erro">
+        ⚠ Apenas sua linha é exibida. Acerte o caso para ver a tabela completa.
+      </p>
+      {% endif %}
+    </section>
+
+    <div class="btn-wrapper">
+      <a href="/" class="btn-resolver btn-voltar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Investigar Novamente</span>
+      </a>
+    </div>
+
+    <footer class="site-footer">DETETIVE LÓGICO &mdash; DIVISÃO DE CRIMES FINANCEIROS</footer>
+
+  </div>
+</body>
+</html>

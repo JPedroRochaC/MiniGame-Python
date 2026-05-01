@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detetive Lógico</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Special+Elite&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <div class="page-wrapper">
+
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="badge">CASO #0047</div>
+      <h1>🕵️ Detetive Lógico</h1>
+      <p class="subtitle">Roubo ao Banco Central — Analise as evidências e identifique o culpado</p>
+    </header>
+
+    <form action="/jogar" method="POST">
+
+      <!-- CENA DO CRIME -->
+      <section class="card">
+        <div class="card-label">CENA DO CRIME</div>
+        <div class="crime-scene">
+          <img src="{{ url_for('static', filename='img/a6p2d-1bfk8.jpg') }}" alt="Cena do crime" class="img-cena">
+          <div class="scene-caption">Cofre arrombado — Banco Central, 03h17</div>
+        </div>
+      </section>
+
+      <!-- PISTAS -->
+      <section class="card">
+        <div class="card-label">EVIDÊNCIAS</div>
+        <div class="pistas-grid">
+
+          <label class="pista-item">
+            <input type="checkbox" name="pegadas">
+            <div class="pista-box">
+              <span class="pista-nome">Pegadas no chão</span>
+              <span class="pista-desc">Rastros de bota tamanho 42 saindo do cofre</span>
+            </div>
+          </label>
+
+          <label class="pista-item">
+            <input type="checkbox" name="ferramenta">
+            <div class="pista-box">
+              <span class="pista-nome">Pé de cabra</span>
+              <span class="pista-desc">Ferramenta encontrada ao lado do cofre</span>
+            </div>
+          </label>
+
+          <label class="pista-item">
+            <input type="checkbox" name="cameras">
+            <div class="pista-box">             
+              <span class="pista-nome">Câmera desligada</span>
+              <span class="pista-desc">Sistema de CFTV desativado às 02h58</span>
+            </div>
+          </label>
+
+        </div>
+      </section>
+
+      <!-- SUSPEITOS -->
+      <section class="card">
+        <div class="card-label">SUSPEITOS</div>
+
+        <div class="suspeitos-foto">
+          <img src="{{ url_for('static', filename='img/ai8nl-s6axw.jpg') }}" alt="Suspeitos" class="img-suspeitos">
+        </div>
+
+        <div class="suspeitos-grid">
+
+          <label class="suspeito-item">
+            <input type="radio" name="suspeito" value="carlos">
+            <div class="suspeito-box">
+              <div class="suspeito-id">
+                <span class="suspeito-numero">01</span>
+                <span class="suspeito-nome">Carlos</span>
+              </div>
+              <p class="suspeito-desc">Técnico de manutenção. Conhece o sistema de segurança por dentro e tem acesso às plantas do edifício.</p>
+            </div>
+          </label>
+
+          <label class="suspeito-item">
+            <input type="radio" name="suspeito" value="renato">
+            <div class="suspeito-box">
+              <div class="suspeito-id">
+                <span class="suspeito-numero">02</span>
+                <span class="suspeito-nome">Renato</span>
+              </div>
+              <p class="suspeito-desc">Segurança do banco. Estava de plantão na noite do crime, mas alega não ter visto nada incomum.</p>
+            </div>
+          </label>
+
+          <label class="suspeito-item">
+            <input type="radio" name="suspeito" value="juliano">
+            <div class="suspeito-box">
+              <div class="suspeito-id">
+                <span class="suspeito-numero">03</span>
+                <span class="suspeito-nome">Juliano</span>
+              </div>
+              <p class="suspeito-desc">Cliente sem acesso restrito. Esteve no banco na tarde anterior e foi visto na região.</p>
+            </div>
+          </label>
+
+        </div>
+      </section>
+
+      <!-- RESULTADO -->
+      {% if resultado %}
+      <section class="resultado-section status-{{ status }}">
+        <div class="resultado-icon">
+          {% if status == 'vitoria' %}
+          {% elif status == 'aviso' %}
+          {% else %}{% endif %}
+        </div>
+        <p class="resultado-texto">{{ resultado }}</p>
+      </section>
+      {% endif %}
+
+      <!-- BOTÃO -->
+      <div class="btn-wrapper">
+        <button type="submit" class="btn-resolver">
+          <span>Resolver o Caso</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+    </form>
+
+    <footer class="site-footer">
+      DETETIVE LÓGICO &mdash; DIVISÃO DE CRIMES FINANCEIROS
+    </footer>
+
+  </div>
+
+</body>
+</html>
