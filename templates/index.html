@@ -34,33 +34,65 @@
       <!-- PISTAS -->
       <section class="card">
         <div class="card-label">EVIDÊNCIAS</div>
+
+        <div class="pistas-instrucao">
+          <span class="pistas-instrucao-icon">☐</span>
+          <span>Marque todas as pistas que você encontrou na cena do crime antes de resolver o caso</span>
+        </div>
+
         <div class="pistas-grid">
 
           <label class="pista-item">
-            <input type="checkbox" name="pegadas">
+            <input type="checkbox" name="pegadas" id="pegadas">
             <div class="pista-box">
-              <span class="pista-nome">Pegadas no chão</span>
-              <span class="pista-desc">Rastros de bota tamanho 42 saindo do cofre</span>
+              <div class="pista-check-visual">
+                <span class="check-vazio">☐</span>
+                <span class="check-marcado">☑</span>
+              </div>
+              <span class="pista-icon">👣</span>
+              <div>
+                <span class="pista-nome">Pegadas no chão</span>
+                <span class="pista-desc">Rastros de bota tamanho 42 saindo do cofre</span>
+              </div>
             </div>
           </label>
 
           <label class="pista-item">
-            <input type="checkbox" name="ferramenta">
+            <input type="checkbox" name="ferramenta" id="ferramenta">
             <div class="pista-box">
-              <span class="pista-nome">Pé de cabra</span>
-              <span class="pista-desc">Ferramenta encontrada ao lado do cofre</span>
+              <div class="pista-check-visual">
+                <span class="check-vazio">☐</span>
+                <span class="check-marcado">☑</span>
+              </div>
+              <span class="pista-icon">🔧</span>
+              <div>
+                <span class="pista-nome">Pé de cabra</span>
+                <span class="pista-desc">Ferramenta encontrada ao lado do cofre</span>
+              </div>
             </div>
           </label>
 
           <label class="pista-item">
-            <input type="checkbox" name="cameras">
-            <div class="pista-box">             
-              <span class="pista-nome">Câmera desligada</span>
-              <span class="pista-desc">Sistema de CFTV desativado às 02h58</span>
+            <input type="checkbox" name="cameras" id="cameras">
+            <div class="pista-box">
+              <div class="pista-check-visual">
+                <span class="check-vazio">☐</span>
+                <span class="check-marcado">☑</span>
+              </div>
+              <span class="pista-icon">📷</span>
+              <div>
+                <span class="pista-nome">Câmera desligada</span>
+                <span class="pista-desc">Sistema de CFTV desativado às 02h58</span>
+              </div>
             </div>
           </label>
 
         </div>
+
+        <div class="pistas-contador" id="contador">
+          <span id="contador-num">0</span> de 3 pistas coletadas
+        </div>
+
       </section>
 
       <!-- SUSPEITOS -->
@@ -113,9 +145,9 @@
       {% if resultado %}
       <section class="resultado-section status-{{ status }}">
         <div class="resultado-icon">
-          {% if status == 'vitoria' %}
-          {% elif status == 'aviso' %}
-          {% else %}{% endif %}
+          {% if status == 'vitoria' %}🏆
+          {% elif status == 'aviso' %}⚠️
+          {% else %}❌{% endif %}
         </div>
         <p class="resultado-texto">{{ resultado }}</p>
       </section>
@@ -136,6 +168,20 @@
     </footer>
 
   </div>
+
+  <script>
+    const checkboxes = document.querySelectorAll('.pista-item input[type="checkbox"]');
+    const contador = document.getElementById('contador');
+    const contadorNum = document.getElementById('contador-num');
+
+    checkboxes.forEach(cb => {
+      cb.addEventListener('change', () => {
+        const marcadas = [...checkboxes].filter(c => c.checked).length;
+        contadorNum.textContent = marcadas;
+        contador.classList.toggle('completo', marcadas === 3);
+      });
+    });
+  </script>
 
 </body>
 </html>

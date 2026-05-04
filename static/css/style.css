@@ -138,10 +138,36 @@ body {
   border-top: none;
 }
 
+/* ── INSTRUÇÃO DE PISTAS ── */
+.pistas-instrucao {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #0d0505;
+  border: 1px dashed var(--red-dim);
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  font-family: 'Special Elite', cursive;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  line-height: 1.5;
+}
+
+.pistas-instrucao-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  color: var(--red);
+}
+
 /* ── PISTAS ── */
 .pistas-grid { display: flex; flex-direction: column; gap: 0.7rem; }
 
-.pista-item { display: flex; cursor: pointer; }
+.pista-item {
+  display: flex;
+  cursor: pointer;
+}
+
 .pista-item input[type="checkbox"] { display: none; }
 
 .pista-box {
@@ -151,10 +177,15 @@ body {
   background: var(--bg-card-alt);
   border: 1px solid var(--border);
   border-left: 3px solid #2a2a2a;
-  padding: 0.85rem 1rem;
+  padding: 0.9rem 1rem;
   width: 100%;
   transition: all 0.2s;
   position: relative;
+}
+
+.pista-item:hover .pista-box {
+  border-left-color: var(--red-dim);
+  background: #130404;
 }
 
 .pista-item input:checked + .pista-box {
@@ -174,7 +205,34 @@ body {
   color: var(--red);
 }
 
-.pista-icon { font-size: 1.4rem; flex-shrink: 0; }
+/* ── CHECK VISUAL ── */
+.pista-check-visual {
+  flex-shrink: 0;
+  font-size: 1.4rem;
+  width: 1.5rem;
+  text-align: center;
+  transition: color 0.2s;
+  color: var(--text-dim);
+}
+
+.check-marcado {
+  display: none;
+  color: var(--red-bright);
+}
+
+.check-vazio {
+  display: inline;
+  color: var(--text-dim);
+}
+
+.pista-item input:checked + .pista-box .check-marcado { display: inline; }
+.pista-item input:checked + .pista-box .check-vazio   { display: none; }
+.pista-item input:checked + .pista-box .pista-check-visual { color: var(--red-bright); }
+
+.pista-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
 
 .pista-nome {
   font-family: 'Playfair Display', serif;
@@ -190,6 +248,23 @@ body {
   font-style: italic;
   display: block;
   margin-top: 0.15rem;
+}
+
+/* ── CONTADOR ── */
+.pistas-contador {
+  margin-top: 0.9rem;
+  text-align: right;
+  font-family: 'Special Elite', cursive;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  color: var(--red-dim);
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border);
+  transition: color 0.3s;
+}
+
+.pistas-contador.completo {
+  color: var(--gold);
 }
 
 /* ── SUSPEITOS ── */
@@ -217,6 +292,11 @@ body {
   padding: 1rem 1.2rem;
   width: 100%;
   transition: all 0.2s;
+}
+
+.suspeito-item:hover .suspeito-box {
+  border-left-color: var(--red-dim);
+  background: #130404;
 }
 
 .suspeito-item input:checked + .suspeito-box {
@@ -397,11 +477,9 @@ body {
 .tabela-verdade td.col-sep      { border-left: 2px solid var(--red-dim); }
 .tabela-verdade td.col-resultado { border-left: 2px solid var(--red); }
 
-/* V = verde, F = vermelho */
 .val-v { color: var(--green-bright) !important; }
 .val-f { color: #cc3333 !important; }
 
-/* Linha do jogador (acerto) */
 .linha-jogador td {
   background: #1a0e00 !important;
   outline: 2px solid var(--gold);
@@ -409,10 +487,8 @@ body {
   font-weight: 900 !important;
 }
 
-/* Linha verdadeira */
 .linha-verdadeira:not(.linha-jogador) td { background: #071207 !important; }
 
-/* Linha errada */
 .linha-errada td {
   background: #150303 !important;
   outline: 2px solid var(--red);
